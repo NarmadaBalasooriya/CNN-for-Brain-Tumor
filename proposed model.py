@@ -1,3 +1,4 @@
+### Import the necessary libraries ###
 from __future__ import division, print_function, absolute_import
 
 from skimage import color, io
@@ -30,8 +31,9 @@ import pickle
 import h5py
 
 np.set_printoptions(suppress=True)
+
 ########################################
-### Imports picture files
+### Imports picture file into the model
 ########################################
 
 # TumorA = astrocytoma = 0
@@ -43,6 +45,7 @@ np.set_printoptions(suppress=True)
 f = open('full_dataset_final.pkl', 'rb')
 print("pickle file open")
 
+## Load from the file for X(image data) and Y(tumor type)
 allX, allY = pickle.load(f)
 print("pickle opened")
 f.close()
@@ -53,6 +56,7 @@ allX = h5f['train_X']
 allY = h5f['train_Y']
 """
 
+## image size set to 64x54 for faster computations ##
 size_image = 64
 
 
@@ -88,21 +92,17 @@ print("layer 5")
 network = max_pool_2d(conv_4, 2)
 print("layer 6")
 
-# 7: normalize the network
-#network = local_response_normalization(network)
+# 7: Fully-connected 512 nodes layer -> activation function = ReLU
+network = fully_connected(network, 512, activation='relu')
 print("layer 7")
 
-# 8: Fully-connected 512 nodes layer -> activation function = ReLU
-network = fully_connected(network, 512, activation='relu')
+# 8: Dropout layer to combat overfitting
+network = dropout(network, 0.5)
 print("layer 8")
 
-# 9: Dropout layer to combat overfitting
-network = dropout(network, 0.5)
-print("layer 9")
-
-# 10: Fully-connected layer with 5 outputs for five tumor categories
+# 9: Fully-connected layer with 5 outputs for five tumor categories
 network = fully_connected(network, 5, activation='softmax')
-print("layer 10")
+print("layer 9")
 
 
 # Regression layer with loss=categorical crossentropy, optimizer=adam, learning rate=0.0001
