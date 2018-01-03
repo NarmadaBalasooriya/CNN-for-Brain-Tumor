@@ -49,12 +49,6 @@ print("pickle file open")
 allX, allY = pickle.load(f)
 print("pickle opened")
 f.close()
-"""
-
-h5f = h5py.File('dataset.h5', 'r')
-allX = h5f['train_X']
-allY = h5f['train_Y']
-"""
 
 ## image size set to 64x54 for faster computations ##
 size_image = 64
@@ -82,7 +76,6 @@ print("layer 3")
 # 4: Convolution layer with 64 filters -> filter size = 3x3
 conv_3 = conv_2d(conv_2, nb_filter=64, filter_size=3, activation='relu', name='conv_3')
 print("layer 4")
-
 
 # 5: Convolution layer with 128 filters -> filter size = 2x2
 conv_4 = conv_2d(conv_3, nb_filter=128, filter_size=2, activation='relu', name='conv_4')
