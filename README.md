@@ -12,7 +12,7 @@ This is a simple Convolutional Neural Network Model for Brain Tumor Classificati
 Installation of Tensorflow and other libraries can be found in their websites.
 
 # Dataset
-The dataset used for this research project is available under the link https://www.dropbox.com/sh/qor3axvczfd02xy/AABtBMWs8s-_BkIFquOC5Pbua?dl=0.
+The dataset used for this research project is available under the link https://www.dropbox.com/sh/qor3axvczfd02xy/AABtBMWs8s-_BkIFquOC5Pbua?dl=0
 
 # Execution
 1. Make sure all the libaries are installed
